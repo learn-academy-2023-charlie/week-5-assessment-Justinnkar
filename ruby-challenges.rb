@@ -38,27 +38,38 @@ p state_sorter(us_states)
 # Expected output example: 'The Trek bike has 2 wheels and is going 0 mph.'
 
 class Bike
-    def initialize(model = '', wheels = 2, current_speed = 0)
-      @model = model           # Instance variable to store the bike's model
-      @wheels = wheels         # Instance variable to store the number of wheels
-      @current_speed = current_speed   # Instance variable to store the current speed
-    end
-  
-    def bike_info
-      "The bike is a #{@model} with #{@wheels} wheels and has a current speed of #{@current_speed}"
-      # Returns a string containing bike information
-    end
-  
-    def pedal_faster(num)
-      @current_speed += num    # Increase the current speed by the given number
-    end
-  
-    def brake(num)
-      @current_speed -= num    # Decrease the current speed by the given number
-      @current_speed = 0 if @current_speed < 0    # Set current speed to 0 if it becomes negative
-    end
+  attr_accessor :model, :wheels, :current_speed
+
+  def initialize(model = '', wheels = 2, current_speed = 0)
+    @model = model         # Instance variable to store the bike's model
+    @wheels = wheels       # Instance variable to store the number of wheels
+    @current_speed = current_speed   # Instance variable to store the current speed
   end
-  
+
+  def bike_info
+    "The bike is a #{@model} with #{@wheels} wheels and has a current speed of #{@current_speed} mph."
+    # Returns a string containing bike information
+  end
+
+  def pedal_faster(num)
+    @current_speed += num    # Increase the current speed by the given number
+    @current_speed
+  end
+
+  def brake(num)
+    @current_speed -= num    # Decrease the current speed by the given number
+    @current_speed = 0 if @current_speed < 0    # Set current speed to 0 if it becomes negative
+    @current_speed
+  end
+end
+
+my_bike = Bike.new('Trek')
+puts my_bike.bike_info     # The bike is a Trek with 2 wheels and has a current speed of 0 mph.
+
+puts my_bike.pedal_faster(10)    
+puts my_bike.pedal_faster(18)    
+puts my_bike.brake(5)            
+puts my_bike.brake(25)           
 
 # -------------------3b) Add the ability to pedal faster and brake. The pedal_faster method should increase the speed by a given amount. The brake method should decrease the speed by a given amount. The bike cannot go negative speeds.
 
